@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* dark mode */
+:root.dark, .dark {
+  background-color: #1A1A1A !important;
+  color: #fff !important;
+}
+
+
+
