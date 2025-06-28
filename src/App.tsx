@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import Navbar from './components/navbar'
-import Herosection from './components/hero-section'
-// import ThemeToggle from './components/ThemeToggle'
-import Brands from './components/brands'
-import { Courses } from './components/courses'
+import React from 'react';
+import { ThemeProvider } from './contexts/ThemeContext';
+import Navbar from './components/Navbar';
+import HeroSection from './components/HeroSection';
+import WhyChoose from './components/WhyChoose';
+import StudyPaths from './components/StudyPaths';
+import AIBuddy from './components/AIBuddy';
 
-const App = () => {
- 
+function App() {
   return (
-    <div>
-      <Navbar />
-      {/* <ThemeToggle /> */}
-      <Herosection />
-      <Brands/>
-      <Courses/>
-    </div>
-  )
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <Navbar />
+        <HeroSection />
+        <WhyChoose />
+        <StudyPaths />
+        <AIBuddy />
+      </div>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

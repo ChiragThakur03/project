@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
-const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (darkMode) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('darkMode') === 'true';
-    setDarkMode(saved);
-  }, []);
+const ThemeToggle: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex items-center gap-2 justify-end w-full">
+    <button
+      onClick={toggleTheme}
+      className="relative inline-flex items-center justify-center w-12 h-6 bg-gray-200 dark:bg-gray-700 rounded-full p-0.5 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      aria-label="Toggle theme"
+    >
       <div
-        onClick={() => setDarkMode(!darkMode)}
-        className={`w-10  flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-0.5 cursor-pointer transition duration-300`}
+        className={`relative w-5 h-5 bg-white dark:bg-gray-900 rounded-full shadow-lg transform transition-transform duration-300 flex items-center justify-center ${
+          theme === 'light' ? 'translate-x-0' : 'translate-x-5'
+        }`}
       >
-        <div
-          className={`bg-white dark:bg-yellow-400 w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 ${
-            darkMode ? 'translate-x-4' : 'translate-x-0'
-          }`}
-        ></div>
+        {theme === 'light' ? (
+          <Sun className="w-3 h-3 text-yellow-500" />
+        ) : (
+          <Moon className="w-3 h-3 text-blue-400" />
+        )}
       </div>
-      <span className="text-sm">{darkMode ? '🌙 Dark' : '☀️ Light'}</span>
-    </div>
+    </button>
   );
 };
 
